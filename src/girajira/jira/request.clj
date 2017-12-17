@@ -1,16 +1,15 @@
 (ns girajira.jira.request
-  (:require [clj-http.client :as client]))
+  (:require [clj-http.client :as client]
+            [girajira.jira.authentication :as jira-authentication]
+            [cheshire.core :as cheshire]))
 
-(def jira-url (str (System/getenv "JIRA_URL") "/rest/api/2"))
-
-(defn reporter-url
-  [reporter]
-  (str jira-url "/search?jql=reporter=" reporter))
-
-(defn raw-issues
-  [reporter]
-  (client/get (reporter-url reporter) {:basic-auth ["" ""]}))
-
-(defn issues
+(defn jira-api-url
   []
-  (:body (raw-issues)))
+  (str (jira-authentication/url) "/rest/api/2"))
+
+(defn authenticated-get
+  [url]
+  (->>
+    (client/get url {:basic-auth (jira-authentication/basic-auth-params)})
+    (:body)
+    (cheshire/parse-string)))
