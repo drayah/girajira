@@ -6,9 +6,11 @@
                  [compojure "1.5.1"]
                  [clj-http "3.7.0"]
                  [cheshire "5.8.0"]
+                 [aero "1.1.2"]
                  [ring/ring-defaults "0.2.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler girajira.handler/app}
+  :resource-paths ["config"]
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.0"]]}})
