@@ -1,0 +1,4 @@
+{:secrets #include ".secrets.edn"
+ :jira-url ^:ref [:secrets :jira :url]
+ :jira-user ^:ref [:secrets :jira :username]
+ :jira-pass ^:ref [:secrets :jira :password]}
