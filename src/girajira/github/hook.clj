@@ -1,3 +1,5 @@
 (ns girajira.github.hook)
 
-(defn pull-request [] "Hello github")
+(defn pull-request
+  []
+  "Hello github")

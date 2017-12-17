@@ -4,10 +4,13 @@
 (def jira-url (str (System/getenv "JIRA_URL") "/rest/api/2"))
 
 (defn reporter-url
-  [reporter] (str jira-url "/search?jql=reporter=" reporter))
+  [reporter]
+  (str jira-url "/search?jql=reporter=" reporter))
 
 (defn raw-issues
-  [reporter] (client/get (reporter-url reporter) {:basic-auth ["" ""]}))
+  [reporter]
+  (client/get (reporter-url reporter) {:basic-auth ["" ""]}))
 
 (defn issues
-  [] (:body (raw-issues)))
+  []
+  (:body (raw-issues)))
