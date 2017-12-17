@@ -4,7 +4,8 @@
             [cheshire.core :refer :all]))
 
 (defn transitions-url
-  [card-id] (str request/jira-url "/issue/" card-id  "/transitions"))
+  [card-id]
+  (str request/jira-url "/issue/" card-id  "/transitions"))
 
 (defn get-transitions
   [card-id]
@@ -12,4 +13,5 @@
     (transitions-url card-id) {:basic-auth ["matheus.caceres" "KHZqCcaN28qcAC"]})))
 
 (defn parse-body
-  [body] (parse-string body))
+  [body]
+  (parse-string body))
