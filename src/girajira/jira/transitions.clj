@@ -8,3 +8,19 @@
 (defn get-transitions
   [card-id]
   (request/authenticated-get (transitions-url card-id)))
+
+(defn possible-transitions
+  [api-response]
+  (api-response "transitions"))
+
+(defn columns
+  [possible-transitions]
+  (map (fn [element] {(element "name") (element "id")}) possible-transitions))
+
+(defn find-column-id
+  [column-name possible-transitions]
+  (str "moises"))
+
+(defn move-card-to-column
+  [card-id column-id]
+  (str "moises"))
