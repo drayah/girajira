@@ -1,5 +1,6 @@
 (ns girajira.jira.transitions
-  (:require [girajira.jira.request :as request]))
+  (:require [girajira.jira.request :as request]
+            [clojure.string :as string]))
 
 (defn transitions-url
   [card-id]
@@ -9,18 +10,44 @@
   [card-id]
   (request/authenticated-get (transitions-url card-id)))
 
-(defn possible-transitions
+(defn card-transitions
   [api-response]
   (api-response "transitions"))
 
-(defn columns
-  [possible-transitions]
-  (map (fn [element] {(element "name") (element "id")}) possible-transitions))
+(defn extract-kanban-columns
+  [transitions]
+  (map #(hash-map (% "name") (% "id")) transitions))
 
-(defn find-column-id
-  [column-name possible-transitions]
-  (str "moises"))
+(defn kanban-columns-for-card
+  [card-id]
+  (->>
+    (get-transitions card-id)
+    (card-transitions)
+    (extract-kanban-columns)))
 
-(defn move-card-to-column
+(defn kanban-column-with-name?
+  [column-name kanban-column]
+  (let [key (first (keys kanban-column))]
+    (= (string/lower-case column-name)
+       (string/lower-case key))))
+
+(defn filter-kanban-columns-by
+  [column-name columns]
+  (->>
+    (filter #(kanban-column-with-name? column-name %) columns)
+    (first)))
+
+(defn kanban-column-id
+  [column]
+  (first (vals column)))
+
+(defn kanban-column-id-by-card
+  [card-id column-name]
+  (->>
+    (kanban-columns-for-card card-id)
+    (filter-kanban-columns-by column-name)
+    (kanban-column-id)))
+
+(defn move-card-to-kanban-column
   [card-id column-id]
   (str "moises"))
