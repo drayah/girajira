@@ -3,18 +3,18 @@
             [clojure.string :as string]))
 
 (defn transitions-url
-  [card-id]
-  (str (request/jira-api-url) "/issue/" card-id  "/transitions"))
+  [issue-id]
+  (str (request/jira-api-url) "/issue/" issue-id  "/transitions"))
 
 (defn get-transitions
-  [card-id]
-  (request/authenticated-get (transitions-url card-id)))
+  [issue-id]
+  (request/authenticated-get (transitions-url issue-id)))
 
 (defn post-transitions
-  [card-id body]
-  (request/authenticated-post (transitions-url card-id) body))
+  [issue-id body]
+  (request/authenticated-post (transitions-url issue-id) body))
 
-(defn card-transitions
+(defn issue-transitions
   [api-response]
   (api-response "transitions"))
 
@@ -22,11 +22,11 @@
   [transitions]
   (map #(hash-map (% "name") (% "id")) transitions))
 
-(defn kanban-columns-for-card
-  [card-id]
+(defn kanban-columns-for-issue
+  [issue-id]
   (->>
-    (get-transitions card-id)
-    (card-transitions)
+    (get-transitions issue-id)
+    (issue-transitions)
     (extract-kanban-columns)))
 
 (defn kanban-column-with-name?
@@ -45,20 +45,20 @@
   [column]
   (first (vals column)))
 
-(defn card-transition-body
+(defn issue-transition-body
   [column-id]
   {"transition" {"id" column-id}})
 
-(defn move-card-to-kanban-column
-  [card-id column-name]
+(defn kanban-column-id-by-issue
+  [issue-id column-name]
   (->>
-    (kanban-column-id-by-card card-id column-name)
-    (card-transition-body)
-    (post-transitions card-id)))
-
-(defn kanban-column-id-by-card
-  [card-id column-name]
-  (->>
-    (kanban-columns-for-card card-id)
+    (kanban-columns-for-issue issue-id)
     (filter-kanban-columns-by column-name)
     (kanban-column-id)))
+
+(defn move-issue-to-kanban-column
+  [issue-id column-name]
+  (->>
+    (kanban-column-id-by-issue issue-id column-name)
+    (issue-transition-body)
+    (post-transitions issue-id)))
