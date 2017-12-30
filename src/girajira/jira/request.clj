@@ -13,3 +13,11 @@
     (client/get url {:basic-auth (jira-authentication/basic-auth-params)})
     (:body)
     (cheshire/parse-string)))
+
+(defn authenticated-post
+  [url body]
+  (->>
+    (client/post url
+                 {:basic-auth (jira-authentication/basic-auth-params)
+                  :body (cheshire/generate-string body)
+                  :content-type :json})))

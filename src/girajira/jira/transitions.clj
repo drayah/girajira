@@ -10,6 +10,10 @@
   [card-id]
   (request/authenticated-get (transitions-url card-id)))
 
+(defn post-transitions
+  [card-id body]
+  (request/authenticated-post (transitions-url card-id) body))
+
 (defn card-transitions
   [api-response]
   (api-response "transitions"))
@@ -41,13 +45,20 @@
   [column]
   (first (vals column)))
 
+(defn card-transition-body
+  [column-id]
+  {"transition" {"id" column-id}})
+
+(defn move-card-to-kanban-column
+  [card-id column-name]
+  (->>
+    (kanban-column-id-by-card card-id column-name)
+    (card-transition-body)
+    (post-transitions card-id)))
+
 (defn kanban-column-id-by-card
   [card-id column-name]
   (->>
     (kanban-columns-for-card card-id)
     (filter-kanban-columns-by column-name)
     (kanban-column-id)))
-
-(defn move-card-to-kanban-column
-  [card-id column-id]
-  (str "moises"))
