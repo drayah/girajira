@@ -1,6 +1,5 @@
 (ns girajira.handler-test
-  (:require [clojure.test :refer :all]
-            [ring.mock.request :as mock]
+  (:require [ring.mock.request :as mock]
             [midje.sweet :refer :all]
             [girajira.handler :refer :all]))
 
