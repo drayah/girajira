@@ -8,7 +8,6 @@
 
 (defroutes app-routes
   (GET "/" [] (github/pull-request))
-  (GET "/jira" [] (jira/issues))
   (route/not-found "Not Found"))
 
 (def app

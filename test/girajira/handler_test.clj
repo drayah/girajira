@@ -1,14 +1,13 @@
 (ns girajira.handler-test
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
+            [midje.sweet :refer :all]
             [girajira.handler :refer :all]))
 
-(deftest test-app
-  (testing "main route"
-    (let [response (app (mock/request :get "/"))]
-      (is (= (:status response) 200))
-      (is (= (:body response) "Hello World"))))
+(fact "responds to /"
+  (let [response (app (mock/request :get "/"))]
+    (:body response) => "Hello github"
+    (:status response) => 200))
 
-  (testing "not-found route"
-    (let [response (app (mock/request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+(fact "invalid route responds 404"
+  (:status (app (mock/request :get "/invalid"))) => 404)
