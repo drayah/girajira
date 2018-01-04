@@ -8,12 +8,6 @@
    :jira-user "some user"
    :jira-pass "mypassword"})
 
-(fact "returns a jira username from given secrets"
-  (username secrets) => "some user")
-
-(fact "returns a jira password from given secrets"
-  (password secrets) => "mypassword")
-
 (fact "returns a jira url from given secrets"
   (url) => "www.jira.com"
   (provided (config/secrets) => secrets))

@@ -1,15 +1,15 @@
 (ns girajira.jira.authentication
   (:require [girajira.config :as config]))
 
-(defn base-url
+(defn- base-url
   [secrets]
   (:jira-url secrets))
 
-(defn username
+(defn- username
   [secrets]
   (:jira-user secrets))
 
-(defn password
+(defn- password
   [secrets]
   (:jira-pass secrets))
 
