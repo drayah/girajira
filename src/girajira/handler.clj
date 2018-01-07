@@ -7,8 +7,10 @@
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
 
 (defroutes app-routes
-  (GET "/" [] (github/pull-request))
+  (GET "/" [] (github/hello))
+  (POST "/pull-request" [payload] (str payload))
   (route/not-found "Not Found"))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (wrap-defaults app-routes
+    (assoc-in site-defaults [:security :anti-forgery] false)))
