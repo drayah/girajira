@@ -1,4 +1,4 @@
-# girajira
+# Girajira
 
 Girajira is a small clojure web app that automates Jira card transitions via opened github pull requests.
 
@@ -22,7 +22,13 @@ A sample `~/.lein/profiles.clj`:
                   [lein-midje "3.2.1"]]
         :dependencies [[org.clojure/tools.nrepl "0.2.13"]]}}
 ```
-After having setup your `~/.lein/profiles.clj` you can enter the project directory and run `lein midje :autotest` in a new terminal in order to autorun tests whenever you edit and save your source files.
+**Running tests using Midje**
+
+After having setup your `~/.lein/profiles.clj` you can enter the project directory and run the tests by using the `lein midje` command in your terminal.
+
+**Running tests automatically**
+
+Midje allows you to automatically run your tests whenever you change your source code. To automatically run your tests use the `lein midje :autotest` command.
 
 ## Configuring Aero
 
