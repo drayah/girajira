@@ -32,7 +32,7 @@ Midje allows you to automatically run your tests whenever you change your source
 
 ## Configuring Aero
 
-Girajira uses [Aero](https://github.com/juxt/aero) for enviroment configuration. In order to be able to perform requests to Jira's API you need to setup a `.secrets.edn` configuration file in the projects `config` directory. This file will be ignored by `git`.
+Girajira uses [Aero](https://github.com/juxt/aero) for enviroment configuration. In order to be able to perform requests to Jira's API you need to setup a `.secrets.edn` configuration file in the project's `config` directory. This file will be ignored by `git`.
 
 A sample `config/.secrets.edn`:
 ```clojure
