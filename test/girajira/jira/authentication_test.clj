@@ -9,11 +9,11 @@
    :jira-pass "mypassword"})
 
 (facts "when getting the jira url"
-  (fact "it returns the url that was saved in the aero configuration"
+  (fact "it returns the url configured using aero"
     (url) => "www.jira.com"
     (provided (config/secrets) => secrets)))
 
 (facts "when getting the basic auth params"
-  (fact "it returns a vector containing the configured jira username and password"
+  (fact "it returns a vector containing the username and password configured using aero"
     (basic-auth-params) => ["some user" "mypassword"]
     (provided (config/secrets) => secrets)))
