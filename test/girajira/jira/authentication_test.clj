@@ -8,10 +8,12 @@
    :jira-user "some user"
    :jira-pass "mypassword"})
 
-(fact "returns a jira url from given secrets"
-  (url) => "www.jira.com"
-  (provided (config/secrets) => secrets))
+(facts "when getting the jira url"
+  (fact "it returns the url that was saved in the aero configuration"
+    (url) => "www.jira.com"
+    (provided (config/secrets) => secrets)))
 
-(fact "returns basic auth params from given secrets"
-  (basic-auth-params) => ["some user" "mypassword"]
-  (provided (config/secrets) => secrets))
+(facts "when getting the basic auth params"
+  (fact "it returns a vector containing the configured jira username and password"
+    (basic-auth-params) => ["some user" "mypassword"]
+    (provided (config/secrets) => secrets)))

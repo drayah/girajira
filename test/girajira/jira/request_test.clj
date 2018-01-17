@@ -3,6 +3,7 @@
             [girajira.jira.request :refer :all]
             [girajira.jira.authentication :as jira-authentication]))
 
-(fact "returns a jira api url"
-  (jira-api-url) => "http://url/rest/api/2"
-  (provided (jira-authentication/url) => "http://url"))
+(facts "when getting the jira api url"
+  (fact "returns the url with /rest/api/2 appended"
+    (jira-api-url) => "http://url/rest/api/2"
+    (provided (jira-authentication/url) => "http://url")))
