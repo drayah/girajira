@@ -8,10 +8,10 @@
     (:body response) => "Hello github"
     (:status response) => 200))
 
-(fact "responds to /pull-request"
-  (let [response (app (mock/request :post "/pull-request" :payload "payload"))]
-    (:body response) => "Hello github"
-    (:status response) => 200))
+;(fact "responds to /pull-request"
+;  (let [response (app (mock/request :post "/pull-request" :payload "payload"))]
+;    (:body response) => "Hello github"
+;    (:status response) => 200))
 
 (fact "invalid route responds 404"
   (:status (app (mock/request :get "/invalid"))) => 404)
