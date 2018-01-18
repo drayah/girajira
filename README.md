@@ -30,6 +30,10 @@ After having setup your `~/.lein/profiles.clj` you can enter the project directo
 
 Midje allows you to automatically run your tests whenever you change your source code. To automatically run your tests use the `lein midje :autotest` command.
 
+**Running code coverage**
+
+We're using `cloverage` for code coverage. Generate the coverage report by running `lein cloverage --runner :midje` in your terminal.
+
 ## Configuring Aero
 
 Girajira uses [Aero](https://github.com/juxt/aero) for enviroment configuration. In order to be able to perform requests to Jira's API you need to setup a `.secrets.edn` configuration file in the project's `config` directory. This file will be ignored by `git`.
