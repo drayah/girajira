@@ -8,6 +8,7 @@
                  [cheshire "5.8.0"]
                  [aero "1.1.2"]
                  [ring/ring-defaults "0.2.1"]
+                 [ring/ring-json "0.4.0"]
                  [clj-http-fake "1.0.3"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-cloverage "1.0.10"]]
