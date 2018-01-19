@@ -5,7 +5,7 @@
 
 (fact "responds to /"
   (let [response (app (mock/request :get "/"))]
-    (:body response) => "Hello github"
+    (:body response) => "Girajira ;)"
     (:status response) => 200))
 
 (fact "invalid route responds 404"
