@@ -1,5 +1,8 @@
 (ns girajira.api.github.post
-  (:require [clojure.walk :as walk]))
+  (:require [clojure.walk :as walk]
+            [girajira.api.github.validation :as validation]
+            [girajira.api.github.representation :as representation]))
+            ;[girajira.api.github.move-jira-issue]
 
 (defn keywordize-request-body
   [request-body]
@@ -17,4 +20,6 @@
 
 (defn handle
   [request-body]
-  "")
+  (let [pull-request (pull-request-data (keywordize-request-body request-body))]
+    (if (validation/valid-pull-request? pull-request) (println "perform jira!"))
+    (representation/no-content)))
