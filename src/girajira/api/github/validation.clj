@@ -18,13 +18,27 @@
     (= action "opened")
     (= action "merged")))
 
+(defn- normalize-column
+  [tag-parts column-index]
+  (->
+    (nth tag-parts column-index)
+    (string/replace "_" " ")))
+
 (defn- girajira-tag
   [body]
   (->>
-    (string/split body #" ")
+    (string/split body #"\s+")
     (map #(string/trim %))
     (filter #(string/includes? % tag))
     (first)))
+
+(defn girajira-tag-data
+  [body]
+  (let [tag (girajira-tag body)
+        tag-parts (string/split tag #":")]
+    {:issue (nth tag-parts 1)
+     :open (normalize-column tag-parts 2)
+     :merge (normalize-column tag-parts 3)}))
 
 (defn- valid-tag-format?
   [tag]
