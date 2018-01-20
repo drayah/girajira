@@ -1,10 +1,6 @@
 (ns girajira.api.github.post
   (:require [clojure.walk :as walk]))
 
-(defn handle
-  [request-body]
-  "")
-
 (defn keywordize-request-body
   [request-body]
   (walk/keywordize-keys request-body))
@@ -18,3 +14,7 @@
       (assoc :body (get-in body [:pull_request :body]))
       (assoc :target (get-in body [:pull_request :base :ref]))
       (assoc :user (get-in body [:pull_request :user :login])))))
+
+(defn handle
+  [request-body]
+  "")
