@@ -2,15 +2,15 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [clj-http.client :as client]
-            [girajira.github.pull-request :as github]
             [ring.util.response :refer [resource-response response]]
             [ring.middleware.json :as middleware]
-            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]))
+            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [girajira.api.github.post :as github-post]))
 
 (defroutes app-routes
   (GET "/" [] "Girajira ;)")
   (GET "/test-json-response" [] (response {:fulano "test"}))
-  (POST "/github/pull-request" {request-body :body} (github/pull-request request-body))
+  (POST "/github/pull-request" {request-body :body} (github-post/handle request-body))
   (route/not-found "Not Found"))
 
 (def app
