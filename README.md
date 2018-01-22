@@ -55,3 +55,6 @@ To start a web server for the application, run:
 ## License
 
 Copyright © 2017
+
+
+Péncil
