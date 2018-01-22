@@ -8,12 +8,21 @@
   [request-body]
   (walk/keywordize-keys request-body))
 
+(defn- closed-action
+  [action merged]
+  (if
+    (and
+     (= action "closed")
+     (true? merged)) "merged" action))
+
 (defn pull-request-data
   [body]
-  (let [filtered-data {}]
+  (let [filtered-data {}
+        action (get-in body [:action])
+        merged (get-in body [:pull_request :merged])]
     (->
       filtered-data
-      (assoc :action (get-in body [:action]))
+      (assoc :action (closed-action action merged))
       (assoc :body (get-in body [:pull_request :body]))
       (assoc :target (get-in body [:pull_request :base :ref]))
       (assoc :user (get-in body [:pull_request :user :login])))))
