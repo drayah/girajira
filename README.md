@@ -5,7 +5,11 @@ Girajira is a small clojure web app that automates Jira card transitions via ope
 ## Prerequisites
 
 - JDK 8 or above
-- [Leiningen 2.8.1](https://leiningen.org/) or above.
+- [Leiningen 2.8.1](https://leiningen.org/) or abov
+
+
+
+sasasasae.
 
 ## Testing & Plugins
 
