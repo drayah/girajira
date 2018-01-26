@@ -1,5 +1,5 @@
-(ns girajira.jira.transitions
-  (:require [girajira.jira.request :as request]
+(ns girajira.integrations.jira.transitions
+  (:require [girajira.integrations.jira.request :as request]
             [clojure.string :as string]))
 
 (defn transitions-url

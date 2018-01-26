@@ -1,7 +1,7 @@
-(ns girajira.jira.request-test
+(ns girajira.integrations.jira.request-test
   (:require [midje.sweet :refer :all]
-            [girajira.jira.request :refer :all]
-            [girajira.jira.authentication :as jira-authentication])
+            [girajira.integrations.jira.request :refer :all]
+            [girajira.integrations.jira.authentication :as jira-authentication])
   (:use clj-http.fake))
 
 (facts "when getting the jira api url"

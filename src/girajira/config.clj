@@ -4,4 +4,3 @@
 (defn secrets
   []
   (aero/read-config "config/.config.edn"))
-

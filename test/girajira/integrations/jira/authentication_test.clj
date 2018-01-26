@@ -1,6 +1,6 @@
-(ns girajira.jira.authentication-test
+(ns girajira.integrations.jira.authentication-test
   (:require [midje.sweet :refer :all]
-            [girajira.jira.authentication :refer :all]
+            [girajira.integrations.jira.authentication :refer :all]
             [girajira.config :as config]))
 
 (def secrets

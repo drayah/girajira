@@ -1,6 +1,6 @@
-(ns girajira.jira.request
+(ns girajira.integrations.jira.request
   (:require [clj-http.client :as client]
-            [girajira.jira.authentication :as jira-authentication]
+            [girajira.integrations.jira.authentication :as jira-authentication]
             [cheshire.core :as cheshire]))
 
 (defn jira-api-url
