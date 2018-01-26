@@ -1,4 +1,4 @@
-(ns girajira.jira.authentication
+(ns girajira.integrations.jira.authentication
   (:require [girajira.config :as config]))
 
 (defn- base-url
