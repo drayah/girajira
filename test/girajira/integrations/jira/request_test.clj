@@ -10,12 +10,24 @@
     (provided (jira-authentication/url) => "http://url")))
 
 (with-fake-routes
-  {"http://jira.com/api"
+  {"http://jira.com/get"
    (fn [request] {:status 200
                   :headers {}
                   :body "{\"fulano\": \"some fake json\"}"})}
 
   (facts "when performing an authenticated get request"
     (fact "it returns the parsed response body"
-      (authenticated-get "http://jira.com/api") => {"fulano" "some fake json"}
+      (authenticated-get "http://jira.com/get") => {"fulano" "some fake json"}
       (provided (jira-authentication/basic-auth-params) => ["user" "pass"]))))
+
+(with-fake-routes
+  {"http://jira.com/post"
+   (fn [request] {:status 204
+                  :headers {}
+                  :body "{\"result\": \"fake result\"}"})}
+
+  (facts "when performing an authenticated post request given a request body"
+    (fact "it returns a valid response"
+      (let [request-body {:payload "fake payload"}]
+       (authenticated-post "http://jira.com/post" request-body) => {:status 204 :body {"result" "fake result"}}
+       (provided (jira-authentication/basic-auth-params) => ["user" "pass"])))))
