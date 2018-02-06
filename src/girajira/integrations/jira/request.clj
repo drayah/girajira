@@ -3,8 +3,7 @@
             [girajira.integrations.jira.authentication :as jira-authentication]
             [cheshire.core :as cheshire]))
 
-(defn jira-api-url
-  []
+(defn jira-api-url []
   (str (jira-authentication/url) "/rest/api/2"))
 
 (defn authenticated-get
@@ -16,8 +15,9 @@
 
 (defn authenticated-post
   [url body]
-  (->>
-    (client/post url
-                 {:basic-auth (jira-authentication/basic-auth-params)
-                  :body (cheshire/generate-string body)
-                  :content-type :json})))
+  (let [response (client/post url {:basic-auth (jira-authentication/basic-auth-params)}
+                    :body (cheshire/generate-string body)
+                    :content-type :json)]
+    (assoc {}
+           :status (:status response)
+           :body (cheshire/parse-string (:body response)))))
