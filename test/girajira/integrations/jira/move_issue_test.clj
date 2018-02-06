@@ -1,6 +1,6 @@
-(ns girajira.api.github.move-jira-issue-test
+(ns girajira.integrations.jira.move-issue-test
   (:require [midje.sweet :refer :all]
-            [girajira.api.github.move-jira-issue :refer :all]
+            [girajira.integrations.jira.move-issue :refer :all]
             [girajira.integrations.jira.transitions :as jira]))
 
 (def opened-pull-request-move-data {:action "opened"

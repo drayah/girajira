@@ -5,11 +5,13 @@
             [ring.util.response :refer [resource-response response]]
             [ring.middleware.json :as middleware]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
-            [girajira.api.github.post :as github-post]))
+            [girajira.api.github.post :as github-post]
+            [girajira.infra.events.pubsub :as pubsub]))
 
 (defroutes app-routes
   (GET "/" [] "Girajira ;)")
   (GET "/test-json-response" [] (response {:fulano "test"}))
+  (GET "/test-events" [] (pubsub/test-pub-sub))
   (POST "/github/pull-request" {request-body :body} (github-post/handle request-body))
   (route/not-found "Not Found"))
 

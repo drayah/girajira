@@ -1,8 +1,9 @@
 (defproject girajira "0.1.0-SNAPSHOT"
   :description "Girajira - github and jira integration for development process automation"
-  :url "http://example.com/FIXME"
+  :url "https://github.com/oborba/girajira"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/core.async "0.4.474"]
                  [compojure "1.5.1"]
                  [clj-http "3.7.0"]
                  [clj-http-fake "1.0.3"]
@@ -14,7 +15,8 @@
                  [metosin/ring-http-response "0.9.0"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-cloverage "1.0.10"]]
-  :ring {:handler girajira.handler/app}
+  :ring {:handler girajira.handler/app
+         :init girajira.infra.events.initialize/initialize-subscribers}
   :resource-paths ["config"]
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]

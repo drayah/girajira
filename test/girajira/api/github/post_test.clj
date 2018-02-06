@@ -2,7 +2,8 @@
   (:require [midje.sweet :refer :all]
             [girajira.api.github.post :refer :all]
             [girajira.api.github.representation :as representation]
-            [girajira.api.github.move-jira-issue :as jira]))
+            [girajira.infra.events.pubsub :as pubsub]
+            [girajira.infra.events.definitions :as events]))
 
 (def opened-payload
   {"action" "opened"
@@ -72,18 +73,22 @@
   (fact "it moves the jira issue and returns http status 204 no content"
     (handle opened-payload) => 204
     (provided
-      (jira/move-issue {:action "opened"
-                        :issue "ca-123"
-                        :columns {:open "doing done"
-                                  :merge "done"}}) => :ok
+      (pubsub/publish
+        events/github-pull-request-received
+        {:action "opened"
+         :issue "ca-123"
+         :columns {:open "doing done"
+                   :merge "done"}}) => :ok
       (representation/no-content) => 204)))
 
 (facts "when handling the post request given a merged pull request"
   (fact "it moves the jira issue and returns http status 204 no content"
     (handle merged-payload) => 204
     (provided
-      (jira/move-issue {:action "merged"
-                        :issue "ca-123"
-                        :columns {:open "doing done"
-                                  :merge "done"}}) => :ok
+      (pubsub/publish
+        events/github-pull-request-received
+        {:action "merged"
+         :issue "ca-123"
+         :columns {:open "doing done"
+                   :merge "done"}}) => :ok
       (representation/no-content) => 204)))
