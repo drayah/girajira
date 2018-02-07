@@ -15,9 +15,9 @@
 
 (defn authenticated-post
   [url body]
-  (let [response (client/post url {:basic-auth (jira-authentication/basic-auth-params)}
-                    :body (cheshire/generate-string body)
-                    :content-type :json)]
+  (let [response (client/post url {:basic-auth (jira-authentication/basic-auth-params)
+                                   :body (cheshire/generate-string body)
+                                   :content-type :json})]
     (assoc {}
            :status (:status response)
            :body (cheshire/parse-string (:body response)))))
