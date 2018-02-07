@@ -8,7 +8,13 @@
     (fact "it returns http status 200"
       (let [response (app (mock/request :get "/"))]
         (:body response) => "Girajira ;)"
-        (:status response) => 200))))
+        (:status response) => 200)))
+
+  (facts "when responding to /github/pull-request"
+    (fact "it returns http status 204"
+      (let [response (app (-> (mock/request :post "/github/pull-request")
+                              (mock/json-body {:fake "data"})))]
+        (:status response) => 204))))
 
 (facts "when responding to invalid routes"
   (fact "it returns http status 404"

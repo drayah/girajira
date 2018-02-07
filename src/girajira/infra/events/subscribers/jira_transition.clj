@@ -8,9 +8,10 @@
 
 (defn on-event
   [event]
-  (do
-    (println (str "jira-transition: " event))
-    (jira/move-issue event)))
+  (let [move-data (:data event)]
+    (do
+      (println (str "jira-transition: " event))
+      (jira/move-issue move-data))))
 
 (defn initialize-subscriber []
   (pubsub/subscribe

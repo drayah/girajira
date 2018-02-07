@@ -24,10 +24,12 @@
 
 (defn publish
   [event data]
-  (go
-    (>! publisher (assoc data :event event))))
+  (let [payload {:event event
+                 :time 6}]
+    (go
+      (>! publisher (assoc payload :data data)))))
 
 (defn test-pub-sub []
   (do
-    (publish events/sample-event {:person "test"})
+    (publish events/example-event {:person "test"})
     "stub render"))
