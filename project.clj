@@ -7,6 +7,7 @@
                  [compojure "1.5.1"]
                  [clj-http "3.7.0"]
                  [clj-http-fake "1.0.3"]
+                 [clj-time "0.14.2"]
                  [cheshire "5.8.0"]
                  [aero "1.1.2"]
                  [ring/ring-core "1.6.3"]
