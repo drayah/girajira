@@ -10,7 +10,7 @@
 (def publication
   (pub publisher :event))
 
-(defn- event-handler
+(defn initialize-event-handler
   [channel event-fn]
   (go-loop []
            (let [event (<! channel)]
@@ -21,7 +21,7 @@
   [topic channel event-fn]
   (do
     (sub publication topic channel)
-    (event-handler channel event-fn)))
+    (initialize-event-handler channel event-fn)))
 
 (defn publish
   [event data]
@@ -30,8 +30,3 @@
                  :data data}]
     (go
       (>! publisher payload))))
-
-(defn test-pub-sub []
-  (do
-    (publish events/example-event {:person "test"})
-    "stub render"))
