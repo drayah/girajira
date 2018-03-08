@@ -2,7 +2,8 @@
   (:require [clojure.walk :as walk]
             [girajira.api.github.validation :as validation]
             [girajira.api.github.representation :as representation]
-            [girajira.api.github.move-jira-issue :as jira]))
+            [girajira.infra.events.pubsub :as pubsub]
+            [girajira.infra.events.definitions :as events]))
 
 (defn keywordize-request-body
   [request-body]
@@ -44,5 +45,7 @@
   (let [pull-request (pull-request-data (keywordize-request-body request-body))]
     (do
      (if (validation/valid-pull-request? pull-request)
-       (jira/move-issue (move-issue-data pull-request)))
+       (pubsub/publish
+         events/github-pull-request-received
+         (move-issue-data pull-request)))
      (representation/no-content))))

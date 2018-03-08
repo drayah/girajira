@@ -3,10 +3,19 @@
             [midje.sweet :refer :all]
             [girajira.handler :refer :all]))
 
-(fact "responds to /"
-  (let [response (app (mock/request :get "/"))]
-    (:body response) => "Girajira ;)"
-    (:status response) => 200))
+(facts "when responding to routes"
+  (facts "when responding to /"
+    (fact "it returns http status 200"
+      (let [response (app (mock/request :get "/"))]
+        (:body response) => "Girajira ;)"
+        (:status response) => 200)))
 
-(fact "invalid route responds 404"
-  (:status (app (mock/request :get "/invalid"))) => 404)
+  (facts "when responding to /github/pull-request"
+    (fact "it returns http status 204"
+      (let [response (app (-> (mock/request :post "/github/pull-request")
+                              (mock/json-body {:fake "data"})))]
+        (:status response) => 204))))
+
+(facts "when responding to invalid routes"
+  (fact "it returns http status 404"
+    (:status (app (mock/request :get "/invalid"))) => 404))

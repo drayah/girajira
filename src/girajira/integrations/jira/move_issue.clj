@@ -1,4 +1,4 @@
-(ns girajira.api.github.move-jira-issue
+(ns girajira.integrations.jira.move-issue
   (:require [girajira.integrations.jira.transitions :as jira]))
 
 (defn- move-to-column
