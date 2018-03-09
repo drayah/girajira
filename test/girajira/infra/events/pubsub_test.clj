@@ -4,6 +4,28 @@
             [girajira.infra.events.datetime :as datetime]
             [clojure.core.async :as async]))
 
+(def input-channel (async/chan))
+(def output-channel (async/chan))
+
+(defn blocking-read
+  [channel]
+  (async/<!! channel))
+
+(defn blocking-write
+  [channel data]
+  (async/>!! channel data))
+
+(defn test-callback
+  [event]
+  (blocking-write output-channel event))
+
+(facts "when initializing an event handler for a given channel"
+  (fact "it sets up the event handler to act whenever data is received on the channel"
+    (do
+      (initialize-event-handler input-channel test-callback)
+      (blocking-write input-channel ..fake-event-data..)
+      (blocking-read output-channel) => ..fake-event-data..)))
+
 (facts "when subscribing to a topic given a channel and callback function"
   (fact "it subscribes to a publication given the topic and a channel and sets up an event handler"
     (with-redefs [publication ..publication..]
@@ -16,7 +38,6 @@
   (fact "it puts the event data on a channel"
     (with-redefs [publisher (async/chan)
                   datetime/today (fn [] ..current-time..)]
-      (let [blocking-read (fn [] (async/<!! publisher))]
-        (do
-          (publish ..event.. ..data..)
-          (blocking-read) => {:event ..event.. :time ..current-time.. :data ..data..})))))
+      (do
+        (publish ..event.. ..data..)
+        (blocking-read publisher) => {:event ..event.. :time ..current-time.. :data ..data..}))))
