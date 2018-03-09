@@ -1,6 +1,6 @@
 # Girajira
 
-Girajira is a small clojure web app that automates Jira card transitions via opened github pull requests.
+Girajira is a small clojure web api that automates Jira card transitions via opened github pull requests.
 
 ## Prerequisites
 
