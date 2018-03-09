@@ -11,7 +11,8 @@
 (defroutes app-routes
   (GET "/" [] "Girajira ;)")
   (GET "/test-json-response" [] (response {:fulano "test"}))
-  (POST "/api/github/pull-request" {request-body :body} (github-post/handle request-body))
+  (context "/api" []
+           (POST "/github/pull-request" {request-body :body} (github-post/handle request-body)))
   (route/not-found "Not Found"))
 
 (def app
