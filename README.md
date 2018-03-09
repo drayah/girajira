@@ -1,4 +1,4 @@
-# Girajira
+# Girajira test
 
 Girajira is a small clojure web app that automates Jira card transitions via opened github pull requests.
 
