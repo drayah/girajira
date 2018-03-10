@@ -19,6 +19,7 @@
   :ring {:handler girajira.handler/app
          :init girajira.infra.events.initialize/initialize-subscribers}
   :resource-paths ["config"]
+  :uberjar-name "girajira-api.jar"
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.2"]
