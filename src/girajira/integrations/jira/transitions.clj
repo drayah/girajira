@@ -2,28 +2,22 @@
   (:require [girajira.integrations.jira.request :as request]
             [clojure.string :as string]))
 
-(defn transitions-url
-  [issue-id]
+(defn transitions-url [issue-id]
   (str (request/jira-api-url) "/issue/" issue-id  "/transitions"))
 
-(defn get-transitions
-  [issue-id]
+(defn get-transitions [issue-id]
   (request/authenticated-get (transitions-url issue-id)))
 
-(defn post-transitions
-  [issue-id body]
+(defn post-transitions [issue-id body]
   (request/authenticated-post (transitions-url issue-id) body))
 
-(defn issue-transitions
-  [api-response]
+(defn issue-transitions [api-response]
   (api-response "transitions"))
 
-(defn extract-kanban-columns
-  [transitions]
+(defn extract-kanban-columns [transitions]
   (map #(hash-map (% "name") (% "id")) transitions))
 
-(defn kanban-columns-for-issue
-  [issue-id]
+(defn kanban-columns-for-issue [issue-id]
   (->>
     (get-transitions issue-id)
     (issue-transitions)
