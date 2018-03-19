@@ -24,5 +24,6 @@
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.2"]
                         [midje "1.9.1"]]
+         :plugins [[lein-midje "3.2.1"]]
          :ring {:port 8080}}
    :uberjar {:ring {:port 8082}}})
