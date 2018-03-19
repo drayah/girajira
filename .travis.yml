@@ -1,2 +1,6 @@
 language: clojure
 script: lein midje
+
+after_success:
+  - CLOVERAGE_VERSION=1.0.10 lein cloverage --codecov --runner :midje
+  - bash <(curl -s https://codecov.io/bash)
