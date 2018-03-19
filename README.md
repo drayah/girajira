@@ -1,4 +1,4 @@
-# Girajira [![Build Status](https://travis-ci.org/drayah/girajira.svg?branch=master)](https://travis-ci.org/drayah/girajira)
+# Girajira [![Build Status](https://travis-ci.org/drayah/girajira.svg?branch=master)](https://travis-ci.org/drayah/girajira) [![codecov](https://codecov.io/gh/drayah/girajira/branch/master/graph/badge.svg)](https://codecov.io/gh/drayah/girajira)
 
 Girajira is a small clojure web api that automates Jira card transitions via opened github pull requests.
 
