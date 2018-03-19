@@ -9,5 +9,10 @@
     (provided
       (request/jira-api-url) => "http://jira.api")))
 
-(facts "when getting the transitions given an issue-id"
-  (fact "it performs a jira api request and returns json data"))
+(facts "when getting the possible transitions given some issue-id"
+  (fact "it performs a jira api request and returns json response data"
+    (let [fake-url "http://jira.api/issues"]
+      (get-transitions "issue-id") => ..json-response..
+      (provided
+        (transitions-url "issue-id") => fake-url
+        (request/authenticated-get fake-url) => ..json-response..))))
