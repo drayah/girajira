@@ -25,3 +25,9 @@
       (provided
         (transitions-url ..issue-id..) => fake-url
         (request/authenticated-post fake-url fake-body) => ..json-response..))))
+
+(facts "when extracting the possible issue transitions from the json response"
+  (fact "it returns the value of the \"transitions\" key"
+    (let [api-response {"expand" "transitions"
+                        "transitions" ..transitions-data..}]
+      (issue-transitions api-response) => ..transitions-data..)))
