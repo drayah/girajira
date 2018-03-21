@@ -1,1 +1,1 @@
-{:port #or [#env PORT 8080]}
+{:port #or [#env PORT "8080"]}

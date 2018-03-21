@@ -24,7 +24,9 @@
       (middleware/wrap-json-response)
       (wrap-defaults api-defaults)))
 
-(def port (config/webserver))
+(def port
+  (let [port-number ((config/webserver) :port)]
+    {:port (Integer. port-number)}))
 
 (defn -main []
   (run-jetty app port))
