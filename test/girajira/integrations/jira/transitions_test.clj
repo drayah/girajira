@@ -54,6 +54,7 @@
         (kanban-column-with-name? "TODO" column) => truthy
         (kanban-column-with-name? "todo" column) => truthy
         (kanban-column-with-name? "ToDo" column) => truthy))
+
     (facts "and the names don't match"
       (fact "it returns false"
         (kanban-column-with-name? "bla" column) => falsey))))
