@@ -13,17 +13,19 @@
                  [ring/ring-core "1.6.3"]
                  [ring/ring-json "0.5.0-beta1"]
                  [ring/ring-defaults "0.2.1"]
+                 [ring/ring-jetty-adapter "1.6.3"]
                  [metosin/ring-http-response "0.9.0"]]
   :plugins [[lein-ring "0.9.7"]
             [lein-cloverage "1.0.10"]]
   :ring {:handler girajira.handler/app
          :init girajira.infra.events.initialize/initialize-subscribers}
-  :resource-paths ["config"]
+  :main girajira.handler
   :uberjar-name "girajira-api.jar"
+  :resource-paths ["config"]
   :profiles {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                                   [ring/ring-mock "0.3.2"]
                                   [midje "1.9.1"]]
                    :plugins [[lein-midje "3.2.1"]]
                    :ring {:port 8080}}
-             :uberjar {:ring {:port 8084}
-                       :aot :all}})
+             :uberjar {:aot :all
+                       :main girajira.handler}})

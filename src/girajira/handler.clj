@@ -5,8 +5,11 @@
             [ring.util.response :refer [resource-response response]]
             [ring.middleware.json :as middleware]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [ring.adapter.jetty :refer [run-jetty]]
+            [girajira.config :as config]
             [girajira.api.github.post :as github-post]
-            [girajira.infra.events.pubsub :as pubsub]))
+            [girajira.infra.events.pubsub :as pubsub])
+  (:gen-class))
 
 (defroutes app-routes
   (GET "/" [] "Girajira ;)")
@@ -20,3 +23,8 @@
       (middleware/wrap-json-body)
       (middleware/wrap-json-response)
       (wrap-defaults api-defaults)))
+
+(def port (config/webserver))
+
+(defn -main []
+  (run-jetty app port))
