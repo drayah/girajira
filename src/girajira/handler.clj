@@ -12,7 +12,7 @@
   (:gen-class))
 
 (defroutes app-routes
-  (GET "/" [] "Girajira ;)")
+  (GET "/" [] "Welcome to Girajira ;)")
   (GET "/test-json-response" [] (response {:fulano "test"}))
   (context "/api" []
            (POST "/github/pull-request" {request-body :body} (github-post/handle request-body)))

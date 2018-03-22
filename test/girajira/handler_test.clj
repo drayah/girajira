@@ -7,7 +7,7 @@
   (facts "when responding to /"
     (fact "it returns http status 200"
       (let [response (app (mock/request :get "/"))]
-        (:body response) => "Girajira ;)"
+        (:body response) => "Welcome to Girajira ;)"
         (:status response) => 200)))
 
   (facts "when responding to /github/pull-request"
