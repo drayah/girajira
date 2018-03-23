@@ -8,7 +8,7 @@
             [ring.adapter.jetty :refer [run-jetty]]
             [girajira.config :as config]
             [girajira.api.github.post :as github-post]
-            [girajira.infra.events.pubsub :as pubsub])
+            [girajira.infra.events.initialize :refer [initialize-subscribers]])
   (:gen-class))
 
 (defroutes app-routes
@@ -29,4 +29,6 @@
     {:port (Integer. port-number)}))
 
 (defn -main []
-  (run-jetty app port))
+  (do
+    (initialize-subscribers)
+    (run-jetty app port)))
