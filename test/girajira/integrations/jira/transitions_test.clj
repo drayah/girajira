@@ -47,8 +47,24 @@
       (issue-transitions ..json-response..) => ..transitions-data..
       (extract-kanban-columns ..transitions-data..) => ..extracted-column-data..)))
 
-(facts "when checking a (kanban) column against a given name"
-  (let [column {"Todo" "14"}]
+(facts "when getting the (kanban) column id given an issue id and column name"
+  (fact "it calls the correct functions in order to get the column id"
+    (kanban-column-id-by-issue ..issue-id.. ..column-name..) => ..column-id..
+    (provided
+      (kanban-columns-for-issue ..issue-id..) => ..kanban-columns..
+      (filter-kanban-columns-by ..column-name.. ..kanban-columns..) => ..column-data..
+      (kanban-column-id ..column-data..) => ..column-id..)))
+
+(facts "when moving an issue to a (kanban) column"
+  (fact "it calls the correct functions in order to perform a POST request"
+    (move-issue-to-kanban-column ..issue-id.. ..column-name..) => ..json-response..
+    (provided
+      (kanban-column-id-by-issue ..issue-id.. ..column-name..) => ..column-id..
+      (issue-transition-body ..column-id..) => ..payload..
+      (post-transitions ..issue-id.. ..payload..) => ..json-response..)))
+
+(let [column {"Todo" "14"}]
+  (facts "when checking a (kanban) column against a given name"
     (facts "and the names match"
       (fact "it returns true"
         (kanban-column-with-name? "TODO" column) => truthy
@@ -58,3 +74,23 @@
     (facts "and the names don't match"
       (fact "it returns false"
         (kanban-column-with-name? "bla" column) => falsey))))
+
+(let [columns [{"Todo" "1"} {"Doing" "2"} {"Code Review" "3"}]]
+  (facts "when filtering (kanban) columns by name"
+    (facts "and there is no column with given name"
+      (fact "it returns nil"
+        (filter-kanban-columns-by "invalid" columns) => nil))
+
+    (facts "and there is a column with given name"
+      (fact "it returns the column"
+        (filter-kanban-columns-by "doing" columns) => {"Doing" "2"}))))
+
+(facts "when getting the (kanban) column id"
+  (fact "it returns the correct value"
+    (let [column {"Doing" "14"}]
+      (kanban-column-id column) => "14")))
+
+(facts "when creating a transitions POST payload"
+  (fact "it returns a map to be used as the POST body"
+    (let [column-id "15"]
+      (issue-transition-body column-id) => {"transition" {"id" "15"}})))
