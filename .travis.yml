@@ -7,7 +7,8 @@ after_success:
 
 deploy:
   provider: heroku
-  app: girajira
-  on: master
+  app:
+    staging: girajira-staging
+    master: girajira
   api_key:
     secure: WZGT92IsXXNaMRgQ81il0RpVCl/dttDirRsEnKVmLjK7HfuR1jWFhY0wH8aKfy6C31DywcuF4Se/IYsupFHic0LuI6CCwX0OLeoMa0G8AjwtIR/bbItIEAHYH9Z58K5J8bZY0Q8Mp74bx63X/Ph2hk8qRXj07GU6bL+yBIQImxZSCZflD4xdgdvR6h65NUscR2UNsYMT/gK1Fe6i4cIpYprx/Kk1jU49d6CXV64y03fLiFT8i6+BOsbJ+qdxqnkCWQh8FLsaH5DSho7pHuz0a7tWnhZc1qeudfA7LJUMbBk7TwMo+7t7T8bA7eHDUduPoahqBvul1MBW5YVsITUVBUc9wNFayBPyoIXMI0QyQdy/LKXvkpcxNCXFgTTzCoZwyBdHFYH/INo62dlWr7f3r172Ywg5WrdxBmWeE8FnDMhtSmPk2oITpB22qg8yPDpagKp16SS7Ji4fRnYrfMW1S67peAllXIsFS0pRtpAMJ4YvEus66WXXHkh/jPxGv16xIb9Lw1orCHGpSBDNxD1Tggwra13DOKmi7HGpEE0Ig179/z/Y3mV4prb4bZsNl4FwAfXEbxaxSufksTxFJHFNVsv+3GjvfLS0VSWoexpIEbP1N6c34026Jxx1mWXl2kdlojgrkDKSTonCHNpeCrEHa5hjJFyI4RNAiJUrqNLxVOg=
