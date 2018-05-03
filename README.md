@@ -9,22 +9,21 @@ Girajira is a small clojure web api that automates Jira card transitions via ope
 
 ## Testing & Plugins
 
-Girajira uses [Midje](https://github.com/marick/Midje) for automated tests. Add Midje's Leiningen plugin to your `~/.lein/profiles.clj` in order to be able to run the `lein midje` command.
+Girajira uses [Midje](https://github.com/marick/Midje) for automated tests.
 
-Other recommended user plugins are:
+Recommended user plugins are:
 - [CIDER nREPL](https://github.com/clojure-emacs/cider-nrepl)
 - [Ultra](https://github.com/venantius/ultra)
 
 A sample `~/.lein/profiles.clj`:
 ```clojure
 {:user {:plugins [[cider/cider-nrepl "0.16.0"]
-                  [venantius/ultra "0.5.2"]
-                  [lein-midje "3.2.1"]]
+                  [venantius/ultra "0.5.2"]]
         :dependencies [[org.clojure/tools.nrepl "0.2.13"]]}}
 ```
 **Running tests using Midje**
 
-After having setup your `~/.lein/profiles.clj` you can enter the project directory and run the tests by using the `lein midje` command in your terminal.
+Enter the project directory and run the tests by using the `lein midje` command in your terminal.
 
 **Running tests automatically**
 
