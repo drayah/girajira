@@ -17,6 +17,10 @@
              (event-fn event))
            (recur)))
 
+(defmacro defsubscriber [event-name body]
+  `(let [~'channel (chan)]
+     (subscribe ~event-name ~'channel ~body)))
+
 (defn subscribe
   [topic channel event-fn]
   (do
