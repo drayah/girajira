@@ -3,5 +3,7 @@
             [girajira.infra.events.pubsub :as pubsub :refer [defsubscriber]]
             [girajira.infra.events.definitions :as events]))
 
+(def console-write! (partial println))
+
 (defn subscriber [event]
-  (println (str "Example subscriber for event: " event)))
+  (console-write! (str "Subscriber performing work for event: " event)))

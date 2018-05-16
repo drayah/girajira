@@ -8,5 +8,4 @@
   (fact "it initializes all event subscribers"
     (initialize-subscribers) => :initialize-example-subscriber
     (provided
-      (jira/initialize-subscriber) => :initialize-jira-subscriber
-      (example/initialize-subscriber) => :initialize-example-subscriber)))
+      (jira/initialize-subscriber) => :initialize-jira-subscriber)))
