@@ -1,16 +1,6 @@
-(ns girajira.infra.events.subscribers.example-subscriber
-  (:require [clojure.core.async :as async :refer [chan]]
-            [girajira.infra.events.pubsub :as pubsub]
-            [girajira.infra.events.definitions :as events]))
+(ns girajira.infra.events.subscribers.example-subscriber)
 
-(def subscriber (chan))
+(def console-write! (partial println))
 
-(defn on-event
-  [event]
-  (println (str "Example subscriber: " event)))
-
-(defn initialize-subscriber []
-  (pubsub/subscribe
-    events/example-event
-    subscriber
-    on-event))
+(defn subscriber [event]
+  (console-write! (str "Subscriber performing work for event: " event)))
