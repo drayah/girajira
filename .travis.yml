@@ -1,14 +1,12 @@
 language: clojure
 script: lein midje
-
 after_success:
-  - CLOVERAGE_VERSION=1.0.10 lein cloverage --codecov --runner :midje
-  - bash <(curl -s https://codecov.io/bash)
-
+- CLOVERAGE_VERSION=1.0.10 lein cloverage --codecov --runner :midje
+- bash <(curl -s https://codecov.io/bash)
 deploy:
   provider: heroku
   app:
     staging: girajira-staging
     master: girajira
   api_key:
-    secure: WZGT92IsXXNaMRgQ81il0RpVCl/dttDirRsEnKVmLjK7HfuR1jWFhY0wH8aKfy6C31DywcuF4Se/IYsupFHic0LuI6CCwX0OLeoMa0G8AjwtIR/bbItIEAHYH9Z58K5J8bZY0Q8Mp74bx63X/Ph2hk8qRXj07GU6bL+yBIQImxZSCZflD4xdgdvR6h65NUscR2UNsYMT/gK1Fe6i4cIpYprx/Kk1jU49d6CXV64y03fLiFT8i6+BOsbJ+qdxqnkCWQh8FLsaH5DSho7pHuz0a7tWnhZc1qeudfA7LJUMbBk7TwMo+7t7T8bA7eHDUduPoahqBvul1MBW5YVsITUVBUc9wNFayBPyoIXMI0QyQdy/LKXvkpcxNCXFgTTzCoZwyBdHFYH/INo62dlWr7f3r172Ywg5WrdxBmWeE8FnDMhtSmPk2oITpB22qg8yPDpagKp16SS7Ji4fRnYrfMW1S67peAllXIsFS0pRtpAMJ4YvEus66WXXHkh/jPxGv16xIb9Lw1orCHGpSBDNxD1Tggwra13DOKmi7HGpEE0Ig179/z/Y3mV4prb4bZsNl4FwAfXEbxaxSufksTxFJHFNVsv+3GjvfLS0VSWoexpIEbP1N6c34026Jxx1mWXl2kdlojgrkDKSTonCHNpeCrEHa5hjJFyI4RNAiJUrqNLxVOg=
+    secure: mL2KOzAcbh6LhBmb7msw+uZKs79Zg8gtmOD9mLBz1uxnIEYc65i4t6PLcHmZNGAJmCB9tzFY/XDkfUv5bGDzWX2WKZW2cn5CNXnfyOLcXGpINPhR9rAUeAmxsSQZs965rqh4jfbT6IacqCRiNH2AOk+I9B0krpSpAbeOVx2WFjEx0Z0GtikN33UKwWofrAK5IenMV6s5LSGWTXvTWO7p9QKKCbcthSz+QjnOUaGMVCC3s3hkcgI1dgKc6sYTdnSiC3GmOha0d6snUmOUV+5wDG5OsHShVYeNf7Q5cOFIE217/9sVADeRDYq/I/Dis1MlZ+eryW8tYGPopNa/wFk8KfnziGzsow5l7hpNxJhT9Q9vHrkQ6M5Sx5923mJ+LL3zQQl2QVInNToZW1LH6DEuHqvtVzGAHfij9qTVu+ok1lw2+hiORQYtAc5tvHKDp4ucoUsGc1IhKsvrb1kBPjNba8L2X0J49szWzrSs2nBpkJi5k6COCFNrsk1UanZ+grFdLCZmEL/RadyCx1SYCQ9T7Rvj3Oj4i5HCUdKQGoK/hAHygKSOcbG5NBPQFCd06X9nqdvlvShQxky5Q1+LGYFthsAaC+6+ZsWTuje/wbup12k8t2T33I5hw19Si0bV22P1WhNvnUd25wE9rMk7k1DjI+opO+NkFg1ySjWd1v4MLmY=
