@@ -7,5 +7,4 @@
 (defn initialize-subscribers []
   (do
     (defsubscriber events/example-event example/subscriber)
-    (jira/initialize-subscriber)))
-    ;(defsubscriber events/github-pull-request-received jira/subscriber)
+    (defsubscriber events/github-pull-request-received jira/subscriber)))
